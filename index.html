@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Pixel Art Maker</title>
+</head>
+
+<body>
+    <div class="app">
+        <aside>
+            <header>
+                <div
+                    style="width:44px;height:44px;border-radius:8px;background:var(--panel);display:flex;align-items:center;justify-content:center">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+                        <!-- 2x2 grid of pixels -->
+                        <rect x="3" y="3" width="8" height="8" fill="#244b6d" rx="2" />
+                        <rect x="13" y="3" width="8" height="8" fill="#f08a2d" rx="2" />
+                        <rect x="3" y="13" width="8" height="8" fill="#f08a2d" rx="2" />
+                        <rect x="13" y="13" width="8" height="8" fill="#244b6d" rx="2" />
+                    </svg>
+                </div>
+                <h1>Pixel Art Maker</h1>
+            </header>
+
+            <div class="tools" title="Tools">
+                <button id="undoBtn" class="secondary">Undo (Ctrl Z)</button>
+                <button id="redoBtn" class="secondary">Redo (Ctrl Y)</button>
+                <div class="tool active" data-tool="pencil">Pencil</div>
+                <div class="tool" data-tool="eraser">Eraser</div>
+                <div class="tool" data-tool="line">Line</div>
+                <div class="tool" data-tool="rect">Rectangle</div>
+                <div class="tool" data-tool="oval">Oval</div>
+                <div class="tool" data-tool="fill">Fill</div>
+                <div class="tool" data-tool="eyedropper">Eyedropper</div>
+                <button id="exportBtn">Export as PNG</button>
+                <button id="clearBtn" class="secondary">Clear</button>
+                <div class="hint">Export produces a PNG<br>Clear resets the canvas</div>
+            </div>
+
+            <div class="control">
+                <label>Color</label>
+                <div class="color-row">
+                    <div class="color-swatch" id="swatch" style="background:#000"></div>
+                    <div class="color-input">
+                        <input type="color" id="colorPicker" value="#000000" />
+                        <input type="text" id="hexInput" value="#000000" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="control">
+                <label>Canvas size (pixels)</label>
+                <div class="row">
+                    <div class="row">
+                        <input type="number" id="canvasWidth" min="5" max="1024" step="1" value="250"
+                            style="width:60px;" />
+                        <span>×</span>
+                        <input type="number" id="canvasHeight" min="5" max="1024" step="1" value="250"
+                            style="width:60px;" />
+                        <button id="resizeBtn" class="secondary">Resize</button>
+                    </div>
+                </div>
+
+                <div class="control">
+                    <label>Zoom / Display scale</label>
+                    <input id="zoom" type="range" min="2" max="20" value="3" step="0.25" />
+                    <div class="small">Zoom: <span id="zoomVal">3×</span></div>
+                    <div class="hint">Use zoom to preview larger pixels.</div>
+                </div>
+
+                <div class="control">
+                    <div class="control">
+                        <label>Stroke Width</label>
+                        <input id="strokeWidth" type="range" min="1" max="30" value="1" />
+                        <div class="small">Width: <span id="strokeWidthVal">1 px</span></div>
+                        <div class="hint">Controls the thickness for pencil, eraser, line, and shape borders.</div>
+                    </div>
+                    <div class="filled-toggle">
+                        <label><input type="checkbox" id="fillShapes" checked /> Filled shapes</label>
+                    </div>
+                </div>
+
+                <div class="tool-legend">
+                    <strong>Shortcuts:</strong> P = Pen, L = Line, R = Rect, O = Oval, F = Fill, I = Eyedropper
+                </div>
+
+                <div>
+                    <div class="hint" style="margin-top:12px;">By <a href="https://github.com/Cheze-Burgur" target="_blank"
+                            style="color:var(--accent);text-decoration:none;">@Cheze</a></div>
+                </div>
+
+        </aside>
+
+        <main>
+            <div class="canvas-wrap">
+                <div class="canvas-stage">
+                    <!-- main pixel canvas (internal resolution = grid size) -->
+                    <canvas id="mainCanvas"></canvas>
+                    <!-- overlay for shape previews -->
+                    <canvas id="overlayCanvas" class="grid-overlay"></canvas>
+                </div>
+                <footer>
+                    <div class="small">Canvas: <span id="sizeReadout">300 × 300</span> — Tool: <span
+                            id="activeTool">Pencil</span></div>
+                </footer>
+            </div>
+        </main>
+    </div>
+</body>
+
+</html>
