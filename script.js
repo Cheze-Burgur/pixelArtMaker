@@ -1,5 +1,4 @@
-
-        const DEFAULT_SIZE = 250;
+const DEFAULT_SIZE = 250;
 
         const mainCanvas = document.getElementById('mainCanvas');
         const overlayCanvas = document.getElementById('overlayCanvas');
