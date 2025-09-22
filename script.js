@@ -602,3 +602,4 @@ const DEFAULT_SIZE = 250;
         });
 
         function capitalize(s) { return s.charAt(0).toUpperCase() + s.slice(1); }
+//for some reason i had to add this to get it to work :/
